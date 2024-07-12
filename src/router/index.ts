@@ -1,26 +1,41 @@
 import { createRouter, createWebHistory } from "vue-router";
 import HomeView from "../views/HomeView.vue";
+import RootLayout from "@/layouts/root-layout/index.vue";
+import UserLayout from "@/layouts/user-layout/index.vue";
+import { useConfigStore } from "@/stores/config";
+import { useUserStore } from "@/stores/user";
+import { getCurrentUser } from "@/service/user";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
       path: "/",
-      name: "home",
-      component: HomeView,
+      component: RootLayout,
+      children: [
+        {
+          path: "/home",
+          name: "home",
+          component: HomeView,
+        },
+        {
+          path: "/about",
+          name: "about",
+          component: () => import("../views/AboutView.vue"),
+        },
+        { path: "/", redirect: "/home" },
+      ],
     },
     {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (About.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () => import("../views/AboutView.vue"),
-    },
-    {
-      path: "/login",
-      name: "login",
-      component: () => import("../views/LoginView.vue"),
+      path: "/user",
+      component: UserLayout,
+      children: [
+        {
+          path: "/user/login",
+          name: "login",
+          component: () => import("../views/LoginView.vue"),
+        },
+      ],
     },
     {
       path: "/:catchAll(.*)",
@@ -30,22 +45,42 @@ const router = createRouter({
   ],
 });
 
-router.beforeEach((to, from, next) => {
-  if (to.path === "/login") {
+async function checkIsLogin(): Promise<boolean> {
+  // 校验token
+  if (!localStorage.getItem("token")) {
+    return false;
+  }
+  // 校验store中是否有用户信息
+  const { user, setUser } = useUserStore();
+
+  // 如果store中没有用户信息，则请求接口获取用户信息
+  if (!user) {
+    try {
+      const { data } = await getCurrentUser();
+      setUser(data.data);
+    } catch (error) {
+      return false;
+    }
+  }
+  return true;
+}
+
+router.beforeEach(async (to, from, next) => {
+  const { setLoading } = useConfigStore();
+  setLoading(true);
+  if (to.path === "/user/login") {
     next();
+    setLoading(false);
     return;
   }
 
-  function checkLogin() {
-    return true;
-  }
-
   // 进行权限验证或登录判断
-  if (checkLogin()) {
-    next("/login"); // 重定向到登录页面
+  if (!(await checkIsLogin())) {
+    next("/user/login"); // 重定向到登录页面
   } else {
     next(); // 允许路由跳转
   }
+  setLoading(false);
 });
 
 export default router;
