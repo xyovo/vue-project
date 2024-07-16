@@ -4,7 +4,7 @@ import RootLayout from "@/layouts/root-layout/index.vue";
 import UserLayout from "@/layouts/user-layout/index.vue";
 import { useConfigStore } from "@/stores/config";
 import { useUserStore } from "@/stores/user";
-import { getCurrentUser } from "@/service/user";
+import { getUserInfo } from "@/service/user";
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -22,6 +22,11 @@ const router = createRouter({
           path: "/about",
           name: "about",
           component: () => import("../views/AboutView.vue"),
+        },
+        {
+          path: "/follow",
+          name: "follow",
+          component: () => import("../views/FollowView.vue"),
         },
         { path: "/", redirect: "/home" },
       ],
@@ -47,7 +52,7 @@ const router = createRouter({
 
 async function checkIsLogin(): Promise<boolean> {
   // 校验token
-  if (!localStorage.getItem("token")) {
+  if (!localStorage.getItem("Authorization")) {
     return false;
   }
   // 校验store中是否有用户信息
@@ -56,8 +61,8 @@ async function checkIsLogin(): Promise<boolean> {
   // 如果store中没有用户信息，则请求接口获取用户信息
   if (!user) {
     try {
-      const { data } = await getCurrentUser();
-      setUser(data.data);
+      const { data } = await getUserInfo();
+      setUser(data);
     } catch (error) {
       return false;
     }

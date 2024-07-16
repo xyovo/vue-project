@@ -3,7 +3,7 @@ import { defineStore } from "pinia";
 
 export const useUserStore = defineStore("user", () => {
   const user = ref<API.User | null>(null);
-  function setUser(u: API.User) {
+  function setUser(u: API.User | null) {
     user.value = u;
   }
 

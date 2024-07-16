@@ -3,7 +3,7 @@ import { generateService } from "@umijs/openapi";
 const openApi = [
   {
     requestLibPath: "import request from '@/utils/request'", // 想怎么引入封装请求方法
-    schemaPath: "http://127.0.0.1:4523/export/openapi?projectId=4732193", // openAPI规范地址
+    schemaPath: "http://127.0.0.1:4523/export/openapi?projectId=4417929", // openAPI规范地址
     projectName: "./src/service", // 生成到哪个目录内
     serversPath: "./", // 生成代码到哪个目录
   },

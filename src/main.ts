@@ -5,6 +5,7 @@ import router from "./router";
 import ArcoVue from "@arco-design/web-vue";
 import "./assets/main.css";
 import "@arco-design/web-vue/dist/arco.css";
+import "element-plus/dist/index.css";
 
 const app = createApp(App);
 
