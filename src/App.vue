@@ -14,7 +14,7 @@ const { loading } = storeToRefs(configStore)
   <el-config-provider :locale="zhCn">
     <div v-show="loading">
       <div class="w-full h-screen xyc">
-        <a-spin :size="30" />
+        <img style="height: 30px;" src="/logo.svg" alt="logo" class="animate-pulse" />
       </div>
     </div>
     <div v-show="!loading">

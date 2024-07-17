@@ -1,13 +1,13 @@
 <template>
   <div class="w-full h-ull flex flex-1 justify-center space-x-10 px-4">
-    <div key="home">首页</div>
-    <div key="follow">关注</div>
-    <div key="about">其他</div>
+    <div class="item active" key="home">首页</div>
+    <div class="item" key="follow">关注</div>
+    <div class="item" key="about">其他</div>
   </div>
 </template>
 
 <script setup lang="ts">
-import { onMounted, ref, watch, withDefaults } from "vue";
+import { onMounted, ref, watch } from "vue";
 import { useRoute } from "vue-router";
 
 enum Menu {
@@ -43,3 +43,13 @@ onMounted(() => {
 });
 
 </script>
+
+<style scoped>
+.item {
+  @apply text-sm cursor-pointer;
+}
+
+.active {
+  @apply text-slate-900 underline underline-offset-4;
+}
+</style>

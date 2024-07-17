@@ -1,4 +1,4 @@
-import { Message } from "@arco-design/web-vue";
+import { ElMessage } from "element-plus";
 import { extend } from "umi-request";
 
 export interface ApiResponse {
@@ -35,16 +35,16 @@ request.interceptors.response.use(async (response) => {
 function handleErrorCode(code: number) {
   switch (code) {
     case 401:
-      Message.error("请先登录");
+      ElMessage.error("请先登录");
       break;
     case 403:
-      Message.error("无权限访问");
+      ElMessage.error("无权限访问");
       break;
     case 404:
-      Message.error("资源不存在");
+      ElMessage.error("资源不存在");
       break;
     case 500:
-      Message.error("服务器错误");
+      ElMessage.error("服务器错误");
       break;
   }
 }

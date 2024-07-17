@@ -4,7 +4,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "vite",
+    "dev": "vite --mode mock",
+    "dev:local": "vite --mode local",
     "build": "run-p type-check \"build-only {@}\" --",
     "preview": "vite preview",
     "build-only": "vite build",
@@ -21,7 +22,6 @@
     "vue-router": "^4.3.3"
   },
   "devDependencies": {
-    "@arco-design/web-vue": "^2.55.3",
     "@iconify/json": "^2.2.226",
     "@iconify/tailwind": "^1.1.1",
     "@tsconfig/node20": "^20.1.4",
