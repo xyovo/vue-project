@@ -4,6 +4,7 @@ const list = [
   { id: 2, cover: 'https://picsum.photos/id/1019/200/300', title: 'Title 2', author: 'Author 2', date: '2021-01-02' },
   { id: 3, cover: 'https://picsum.photos/id/1020/200/300', title: 'Title 3', author: 'Author 3', date: '2021-01-03' },
   { id: 4, cover: 'https://picsum.photos/id/1021/200/300', title: 'Title 4', author: 'Author 4', date: '2021-01-04' },
+  { id: 5, cover: 'https://picsum.photos/id/1021/200/300', title: 'Title 4', author: 'Author 4', date: '2021-01-04' },
 ]
 </script>
 

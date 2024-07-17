@@ -73,7 +73,8 @@ async function handleSubmit(ref: FormInstance | undefined) {
       }
     })
   } catch (err) {
-    console.log(err)
+    // npm run dev
+    // pnpm run dev
   }
 
 }

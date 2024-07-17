@@ -30,16 +30,15 @@
   </div>
 
   <!-- 移动端下拉菜单抽屉 -->
-  <el-drawer :direction="'ttb'" size="100vh" class="my-drawer" :show-close="false" :model-value="mobileMenuOpen"
-    :close="() => setMobileMenuOpen(false)" :placement="'left'" :visible="mobileMenuOpen" height="100%" :footer="false"
-    :header="false">
+  <el-drawer append-to-body :direction="'ttb'" size="100vh" class="my-drawer" :show-close="false"
+    :model-value="mobileMenuOpen" :close="() => setMobileMenuOpen(false)" :placement="'left'" :visible="mobileMenuOpen"
+    height="100%" :footer="false" :header="false">
     <div class="w-screen h-[60px] flex justify-between items-center px-4">
       <Logo />
       <span v-show="dt === 'mobile'" @click="setMobileMenuOpen(false)"
         class="icon-[ant-design--close-outlined] text-xl cursor-pointer"></span>
     </div>
-    <!-- 内容 -->
-    <!-- <Menu mode="vertical" /> -->
+    <Menu mode="vertical" />
   </el-drawer>
 
 </template>
